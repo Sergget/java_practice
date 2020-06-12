@@ -32,13 +32,11 @@ public class Main {
 
         for (int i = 0; i < rows; i++) {
             System.arraycopy(arr2d[i], 0, tempArray, i * columns, columns);
-            ;
         }
         tempArray = getSorted(tempArray);
         int[][] result = new int[rows][columns];
         for (int i = 0; i < result.length; i++) {
             System.arraycopy(tempArray, i * columns, result[i], 0, columns);
-            ;
         }
         return result;
     }
