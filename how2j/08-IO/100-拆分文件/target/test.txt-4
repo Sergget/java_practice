@@ -1,0 +1,29 @@
+��：
+
+```java
+public void writeFile() throws IOException {
+    try (OutputStream output = new FileOutputStream("out/readme.txt")) {
+        output.write("Hello".getBytes("UTF-8")); // Hello
+    } // 编译器在此自动为我们写入finally并调用close()
+}
+```
+
+## 阻塞
+
+和`InputStream`一样，`OutputStream`的`write()`方法也是阻塞的。
+
+## OutputStream实现类
+
+用`FileOutputStream`可以从文件获取输出流，这是`OutputStream`常用的一个实现类。此外，`ByteArrayOutputStream`可以在内存中模拟一个`OutputStream`：
+
+```java
+import java.io.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        byte[] data;
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            output.write("Hello ".getBytes("UTF-8"));
+            output.write("world!".getBytes("UTF-8"));
+            data = output.toByteArray();
+        }
+        System.out.println(new String(data, 

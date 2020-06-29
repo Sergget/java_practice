@@ -1,0 +1,25 @@
+�
+
+```java
+public void writeFile() throws IOException {
+    OutputStream output = new FileOutputStream("out/readme.txt");
+    output.write(72); // H
+    output.write(101); // e
+    output.write(108); // l
+    output.write(108); // l
+    output.write(111); // o
+    output.close();
+}
+```
+
+每次写入一个字节非常麻烦，更常见的方法是一次性写入若干字节。这时，可以用`OutputStream`提供的重载方法`void write(byte[])`来实现：
+
+```java
+public void writeFile() throws IOException {
+    OutputStream output = new FileOutputStream("out/readme.txt");
+    output.write("Hello".getBytes("UTF-8")); // Hello
+    output.close();
+}
+```
+
+和`InputStream`一样，上述代码没有考虑到在发生异常的情况下如何正确地关闭资源。写入过程也会经常发生IO错误，例如，磁盘已满，无权限写入等等。我们需要用`try(resource)`来保证`OutputStream`在无论是否发生IO错误的时候都能够正确地关�
